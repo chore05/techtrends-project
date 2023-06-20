@@ -1,0 +1,34 @@
+## Docker commands used to build the application
+
+# Building the Docker image and tagging it as 'techtrends'
+
+docker build -t techtrends -f ./Dockerfile .
+
+## Docker commands used to run the application
+
+# Running the Docker image in detached mode, mapping the port 3111 in the container to port 7111 on the host
+
+docker run -d -p 7111:3111 --name techtrends-app techtrends
+
+## Docker commands used to get the application logs
+
+# Retrieving the logs of the running Docker container
+
+docker logs techtrends-app
+
+## Logs from the container running the TechTrends application
+
+# To get the logs, run the `docker logs` command as specified above
+
+INFO:werkzeug:* Running on <http://172.17.0.2:3111/> (Press CTRL+C to quit)
+INFO:werkzeug:172.17.0.1 - - [20/Jun/2023 07:47:11] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [20/Jun/2023 07:47:11] "GET /static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [20/Jun/2023 07:47:11] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:172.17.0.1 - - [20/Jun/2023 07:48:58] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [20/Jun/2023 07:48:58] "GET /static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [20/Jun/2023 07:48:58] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:172.17.0.1 - - [20/Jun/2023 07:51:25] "GET /create HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [20/Jun/2023 07:51:25] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:root:2023-06-20 07:51:44.096299 - Article "KubeCon + CloudNativeCon 2021" retrieved
+INFO:werkzeug:172.17.0.1 - - [20/Jun/2023 07:51:44] "GET /2 HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [20/Jun/2023 07:51:44] "GET /static/css/main.css HTTP/1.1" 304 -
