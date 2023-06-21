@@ -10,8 +10,8 @@ COPY ./techtrends/requirements.txt ./
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the remaining directory contents into the container at /usr/src/app
-COPY ./techtrends .
+# Copy the init_db.py file into the Docker container
+COPY ./techtrends/init_db.py .
 
 # Run init_db.py to initialize the database
 RUN python init_db.py
