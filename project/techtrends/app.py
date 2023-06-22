@@ -8,7 +8,7 @@ from werkzeug.exceptions import abort
 db_connections = 0
 
 # Set up logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
@@ -26,7 +26,7 @@ def get_post(post_id):
                         (post_id,)).fetchone()
     connection.close()
     if post is not None:
-        logging.info(f'{datetime.now()} - Article "{post["title"]}" retrieved')
+        logging.info('Article "{}" retrieved'.format(post['title']))
     return post
 
 # Define the Flask application
@@ -73,15 +73,16 @@ def index():
 def post(post_id):
     post = get_post(post_id)
     if post is None:
-        logging.warning(f'{datetime.now()} - Non-existing article access, 404 returned')
+        logging.warning('Non-existing article accessed, 404 returned')
         return render_template('404.html'), 404
     else:
+        logging.info('Article "{}" accessed'.format(post['title']))
         return render_template('post.html', post=post)
 
 # Define the About Us page
 @app.route('/about')
 def about():
-    logging.info(f'{datetime.now()} - "About Us" page is retrieved')
+    logging.info('"About Us" page accessed')
     return render_template('about.html')
 
 # Define the post creation functionality 
@@ -99,7 +100,7 @@ def create():
                          (title, content))
             connection.commit()
             connection.close()
-            logging.info(f'{datetime.now()} - Article "{title}" is created')
+            logging.info('Article "{}" created'.format(title))
             return redirect(url_for('index'))
 
     return render_template('create.html')
