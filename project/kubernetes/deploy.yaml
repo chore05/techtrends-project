@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: techtrends
-        image: techtrends:latest
+        image: chore05/techtrends:latest
         resources:
           requests:
             cpu: 250m
